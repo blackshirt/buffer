@@ -1,4 +1,4 @@
-module tls13
+module buffer
 
 fn test_reader_operation_tls13_xargs_org() ! {
 	// data from https://tls13.xargs.org/#server-hello

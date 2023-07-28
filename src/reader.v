@@ -1,4 +1,4 @@
-module tls13
+module buffer
 
 import encoding.binary
 
@@ -41,7 +41,7 @@ pub fn (mut r Reader) reset(b []u8) {
 }
 
 // remainder tells the length of unread portion of buffer.
-ub fn (r &Reader) remainder() int {
+pub fn (r &Reader) remainder() int {
 	if r.idx >= i64(r.buf.len) {
 		return 0
 	}
