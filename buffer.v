@@ -3,7 +3,7 @@ module buffer
 import math
 
 const (
-	empty			= []u8{len:0, cap:0}
+	empty           = []u8{len: 0, cap: 0}
 	u8size          = 1
 	u16size         = 2
 	u24size         = 3
