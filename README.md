@@ -1,36 +1,7 @@
 # buffer
 Simple bytes reader in pure V, adapted from go version of bytes.Reader
 
-# module content
-# module 
-
-
-
-
 ## Contents
-- [new_reader_with_endianess](#new_reader_with_endianess)
-- [new_reader](#new_reader)
-- [Reader](#Reader)
-  - [reset](#reset)
-  - [cap](#cap)
-  - [sub_reader](#sub_reader)
-  - [read_u8](#read_u8)
-  - [read_byte](#read_byte)
-  - [peek_u8](#peek_u8)
-  - [read](#read)
-  - [peek](#peek)
-  - [read_sized](#read_sized)
-  - [peek_sized](#peek_sized)
-  - [read_at_least](#read_at_least)
-  - [skip](#skip)
-  - [read_to_end](#read_to_end)
-  - [read_u16](#read_u16)
-  - [peek_u16](#peek_u16)
-  - [read_u32](#read_u32)
-  - [peek_u32](#peek_u32)
-  - [read_u64](#read_u64)
-  - [peek_u64](#peek_u64)
-  - [remaining](#remaining)
 
 ## new_reader_with_endianess
 ```v
