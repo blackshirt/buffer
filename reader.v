@@ -1,8 +1,9 @@
 module buffer
 
 import encoding.binary
+import blackshirt.u24
 
-// General purposes bytes reader inspired by Golang bytes.Reader
+// Simplenand general purposes bytes reader inspired by Golang bytes.Reader
 // Its mainly backed by two methods for reading a byte or bytes array.
 //    - type of method that updates curent offset (index) of underlying buffers, and
 //    - type of method that does not udpates current index, for looking data.
@@ -151,6 +152,7 @@ pub fn (mut r Reader) read_sized(size int) !([]u8, int) {
 	return buf, n
 }
 
+// peek_sized peek with size 
 pub fn (mut r Reader) peek_sized(size int) !([]u8, int) {
 	mut buf := []u8{len: size}
 	n := r.peek(mut buf)!
@@ -228,6 +230,38 @@ pub fn (mut r Reader) peek_u16() !u16 {
 	return binary.little_endian_u16(b)
 }
 
+// read_u24 read 24 bit of data or 3 bytes from reader, and return integer.
+// its updates index.
+pub fn (mut r Reader) read_u24() !int {
+	if r.remainder() < u24size {
+		return error('not enough bytes to read on')
+	}
+	bytes, n := r.read_sized(u24size)!
+	assert n == u24size
+	// u24 read in big endian, 
+	u24val := u24.from_bytes(bytes)!
+	val := u24val.to_int()!
+
+	return val
+}
+		
+// peek_u24 peek 24 bit of data or 3 bytes from reader, and return integer.
+// its does not updates index.
+pub fn (mut r Reader) peek_u24() !int {
+	if r.remainder() < u24size {
+		return error('not enough bytes to read on')
+	}
+	bytes, n := r.peek_sized(u24size)!
+	assert n == u24size
+	// u24 read is in big endian,
+	// todo: handle little endoan
+	u24val := u24.from_bytes(bytes)!
+	val := u24val.to_int()!
+
+	return val
+}
+
+// read_u32 read u32size bytes data from reader and updatea index
 pub fn (mut r Reader) read_u32() !u32 {
 	b, n := r.read_sized(u32size)!
 	assert n == u32size
@@ -237,6 +271,7 @@ pub fn (mut r Reader) read_u32() !u32 {
 	return binary.little_endian_u32(b)
 }
 
+// peek_u32 peek u32size bytes fron reader without updates index
 pub fn (mut r Reader) peek_u32() !u32 {
 	b, n := r.peek_sized(u32size)!
 	assert n == u32size
@@ -246,6 +281,7 @@ pub fn (mut r Reader) peek_u32() !u32 {
 	return binary.little_endian_u32(b)
 }
 
+// read_u64 read u64size (8) bytes from reader and updates index 
 pub fn (mut r Reader) read_u64() !u64 {
 	b, n := r.read_sized(u64size)!
 	assert n == u64size
@@ -255,6 +291,7 @@ pub fn (mut r Reader) read_u64() !u64 {
 	return binary.little_endian_u64(b)
 }
 
+// peek_u64 peek u64size bytes from reader withhout updates index.
 pub fn (mut r Reader) peek_u64() !u64 {
 	b, n := r.peek_sized(u64size)!
 	assert n == u64size
