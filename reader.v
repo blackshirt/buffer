@@ -152,7 +152,7 @@ pub fn (mut r Reader) read_sized(size int) !([]u8, int) {
 	return buf, n
 }
 
-// peek_sized peek with size 
+// peek_sized peek with size
 pub fn (mut r Reader) peek_sized(size int) !([]u8, int) {
 	mut buf := []u8{len: size}
 	n := r.peek(mut buf)!
@@ -230,35 +230,36 @@ pub fn (mut r Reader) peek_u16() !u16 {
 	return binary.little_endian_u16(b)
 }
 
-// read_u24 read 24 bit of data or 3 bytes from reader, and return integer.
-// its updates index.
+// read_u24 read 3 bytes from reader, and return integer and updates index
 pub fn (mut r Reader) read_u24() !int {
 	if r.remainder() < u24size {
 		return error('not enough bytes to read on')
 	}
 	bytes, n := r.read_sized(u24size)!
 	assert n == u24size
-	u24val := if r.endian { u24.from_big_endian_bytes(bytes)! } else { u24.from_little_endian_bytes(bytes)! }
+	u24val := if r.endian {
+		u24.from_big_endian_bytes(bytes)!
+	} else {
+		u24.from_little_endian_bytes(bytes)!
+	}
 	val := u24val.to_int()!
 
 	return val
 }
-		
-// peek_u24 peek 24 bit of data or 3 bytes from reader, and return integer.
-// its does not updates index.
+
+// peek_u24 peek 3 bytes from reader without updates index.
 pub fn (mut r Reader) peek_u24() !int {
 	if r.remainder() < u24size {
 		return error('not enough bytes to read on')
 	}
 	bytes, n := r.peek_sized(u24size)!
 	assert n == u24size
-	// u24 read is in big endian,
-	// todo: handle little endoan
-	if r.endian { 
-		u24val := u24.from_big_endian_bytes(bytes)! 
+
+	if r.endian {
+		u24val := u24.from_big_endian_bytes(bytes)!
 		val := u24val.to_int()!
 		return val
-	} 
+	}
 	u24val := u24.from_little_endian_bytes(bytes)!
 	val := u24val.to_int()!
 	return val
@@ -284,7 +285,7 @@ pub fn (mut r Reader) peek_u32() !u32 {
 	return binary.little_endian_u32(b)
 }
 
-// read_u64 read u64size (8) bytes from reader and updates index 
+// read_u64 read u64size (8) bytes from reader and updates index
 pub fn (mut r Reader) read_u64() !u64 {
 	b, n := r.read_sized(u64size)!
 	assert n == u64size
