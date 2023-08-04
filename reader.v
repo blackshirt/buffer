@@ -3,7 +3,7 @@ module buffer
 import encoding.binary
 import blackshirt.u24
 
-// Simplenand general purposes bytes reader inspired by Golang bytes.Reader
+// Simplen and general purposes bytes reader inspired by Golang bytes.Reader
 // Its mainly backed by two methods for reading a byte or bytes array.
 //    - type of method that updates curent offset (index) of underlying buffers, and
 //    - type of method that does not udpates current index, for looking data.
@@ -238,8 +238,7 @@ pub fn (mut r Reader) read_u24() !int {
 	}
 	bytes, n := r.read_sized(u24size)!
 	assert n == u24size
-	// u24 read in big endian, 
-	u24val := u24.from_bytes(bytes)!
+	u24val := if r.endian { u24.from_big_endian_bytes(bytes)! } else { u24.from_little_endian_bytes(bytes)! }
 	val := u24val.to_int()!
 
 	return val
@@ -255,9 +254,13 @@ pub fn (mut r Reader) peek_u24() !int {
 	assert n == u24size
 	// u24 read is in big endian,
 	// todo: handle little endoan
-	u24val := u24.from_bytes(bytes)!
+	if r.endian { 
+		u24val := u24.from_big_endian_bytes(bytes)! 
+		val := u24val.to_int()!
+		return val
+	} 
+	u24val := u24.from_little_endian_bytes(bytes)!
 	val := u24val.to_int()!
-
 	return val
 }
 
