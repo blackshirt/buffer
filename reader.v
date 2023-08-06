@@ -3,10 +3,11 @@ module buffer
 import encoding.binary
 import blackshirt.u24
 
-// Simplen and general purposes bytes reader inspired by Golang bytes.Reader
+// Simple and general purposes bytes reader inspired by Golang bytes.Reader
 // Its mainly backed by two methods for reading a byte or bytes array.
 //    - type of method that updates curent offset (index) of underlying buffers, and
 //    - type of method that does not udpates current index, for looking data.
+// for 3 bytes long (24 bit) handling, its depends on `u24` module. Its available on my github.
 
 struct Reader {
 	// read only buffer of underlying data being wrapped
