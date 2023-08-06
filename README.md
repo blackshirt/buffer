@@ -4,7 +4,7 @@ Simple bytes reader in pure V, adapted from go version of bytes.Reader
 ## Installation
 ```$v install https://github.com/blackshirt/buffer```
 
-and then import it in your modulus
+and then import it in your modules.
 
 ## Usage
 ```
@@ -14,6 +14,9 @@ import blackshirt.buffer
 // create new reader with given arrays of bytes as an input.
 // data := []u8
 mut reader := buffer.new_reader(data)
+// example read on byte
+byte := r.read_byte()!
+// do with a byte
 ```
 
 and then you can call desired methods.
