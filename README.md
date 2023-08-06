@@ -1,9 +1,8 @@
-# module blackshirt.buffer
-
-
 # buffer
 Simple bytes reader in pure V, adapted from go version of bytes.Reader
 
+## Installation
+> ```$v install https://github.com/blackshirt/buffer```
 
 ## Contents
 - [new_reader](#new_reader)
