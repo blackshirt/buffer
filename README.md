@@ -14,9 +14,11 @@ import blackshirt.buffer
 // create new reader with given arrays of bytes as an input.
 // data := []u8
 mut reader := buffer.new_reader(data)
-// example read on byte
+// example read one byte 
 byte := r.read_byte()!
-// do with a byte
+// read two byte
+twobyte := r.read_u16()!
+// do with a byte or two byte
 ```
 
 and then you can call desired methods.
