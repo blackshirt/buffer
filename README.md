@@ -2,7 +2,18 @@
 Simple bytes reader in pure V, adapted from go version of bytes.Reader
 
 ## Installation
-> ```$v install https://github.com/blackshirt/buffer```
+```$v install https://github.com/blackshirt/buffer```
+and then import it in your modulus
+
+## Usage
+```
+// import module
+import blackshirt.buffer
+// create new reader with given arrays of bytes as an input.
+// data := []u8
+mut reader := buffer.new_reader(data)
+```
+and then you can call desired methods.
 
 ## Contents
 - [new_reader](#new_reader)
