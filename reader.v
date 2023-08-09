@@ -165,8 +165,8 @@ pub fn (mut r Reader) peek_sized(size int) !([]u8, int) {
 
 // read in amount size from current offset
 pub fn (mut r Reader) read_at_least(amount int) ![]u8 {
-	if amount < 0 {
-		return error('negative amount')
+	if amount <= 0 {
+		return empty
 	}
 	remain := r.remainder()
 	if amount > remain {
