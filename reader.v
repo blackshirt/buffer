@@ -220,7 +220,7 @@ pub fn (mut r Reader) read_u16() !u16 {
 // peek u16 size (two bytes) from reader.
 pub fn (mut r Reader) peek_u16() !u16 {
 	if r.remainder() < u16size {
-		return error('not enough bytes to read on')
+		return error('peek_u16: not enough bytes to read on')
 	}
 	b, _ := r.peek_sized(u16size)!
 
