@@ -42,6 +42,11 @@ pub fn (mut r Reader) reset(b []u8) {
 	}
 }
 
+// current_index tells current index of the reader
+pub fn (r Reader) current_index() i64 {
+	return r.idx 
+}
+
 // remainder tells the length of unread portion of buffer.
 pub fn (r &Reader) remainder() int {
 	if r.idx >= i64(r.buf.len) {
