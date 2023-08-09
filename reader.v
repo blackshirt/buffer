@@ -213,9 +213,8 @@ pub fn (mut r Reader) read_u16() !u16 {
 	if r.remainder() < u16size {
 		return error('read_u16: not enough bytes to read on')
 	}
-	b, _ := r.read_sized(u16size)!
+	b := r.read_at_least(u16size)!
 
-	// assert n == u16size
 	if r.endian {
 		return binary.big_endian_u16(b)
 	}
