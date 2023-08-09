@@ -206,7 +206,7 @@ pub fn (mut r Reader) read_to_end() ![]u8 {
 // read u16 size (two byte) from reader
 pub fn (mut r Reader) read_u16() !u16 {
 	if r.remainder() < u16size {
-		return error('not enough bytes to read on')
+		return error('read_u16: not enough bytes to read on')
 	}
 	b, _ := r.read_sized(u16size)!
 
@@ -234,7 +234,7 @@ pub fn (mut r Reader) peek_u16() !u16 {
 // read_u24 read 3 bytes from reader, and return integer and updates index
 pub fn (mut r Reader) read_u24() !int {
 	if r.remainder() < u24size {
-		return error('not enough bytes to read on')
+		return error('read_u24: not enough bytes to read on')
 	}
 	bytes, n := r.read_sized(u24size)!
 	assert n == u24size
@@ -251,7 +251,7 @@ pub fn (mut r Reader) read_u24() !int {
 // peek_u24 peek 3 bytes from reader without updates index.
 pub fn (mut r Reader) peek_u24() !int {
 	if r.remainder() < u24size {
-		return error('not enough bytes to read on')
+		return error('peek_u24: not enough bytes to read on')
 	}
 	bytes, n := r.peek_sized(u24size)!
 	assert n == u24size
