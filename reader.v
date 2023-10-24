@@ -49,10 +49,10 @@ pub fn (r Reader) current_index() i64 {
 
 // remainder tells the length of unread portion of buffer.
 pub fn (r &Reader) remainder() int {
-	if r.idx >= i64(r.buf.len-1) {
+	if r.idx >= i64(r.buf.len) {
 		return 0
 	}
-		return int(i64(r.buf.len-1) - r.idx)
+	return int(i64(r.buf.len) - r.idx)
 }
 
 // cap return capacity or original size of the buffer.
