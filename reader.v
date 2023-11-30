@@ -57,7 +57,7 @@ pub fn (r &Reader) remainder() int {
 	if r.idx >= r.cap() {
 		return 0
 	}
-	return int(r.cap() - r.idx - 1)
+	return int(r.cap() - r.idx)
 }
 
 // cap return capacity or original size of the buffer.
