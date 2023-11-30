@@ -54,10 +54,10 @@ pub fn (r Reader) current_index() i64 {
 
 // remainder tells the length of unread portion of buffer.
 pub fn (r &Reader) remainder() int {
-	if r.idx >= i64(r.buf.len) {
+	if r.idx >= r.cap() {
 		return 0
 	}
-	return int(i64(r.buf.len) - r.idx)
+	return int(r.cap() - r.idx)
 }
 
 // cap return capacity or original size of the buffer.
@@ -180,7 +180,7 @@ pub fn (mut r Reader) read_at_least(amount int) ![]u8 {
 	}
 	remain := r.remainder()
 	if amount > remain {
-		return error('amount bigger than unread portion')
+		return error('amount to read is bigger than remaining bytes')
 	}
 	if r.idx + i64(amount) > r.cap() {
 		return error('overflow cap')
