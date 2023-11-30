@@ -178,10 +178,10 @@ pub fn (mut r Reader) read_at_least(amount int) ![]u8 {
 	if amount <= 0 {
 		return empty
 	}
-	remain := r.remainder()
-	if amount > remain {
-		return error('amount to read is bigger than remaining bytes')
-	}
+	//remain := r.remainder()
+	//if amount > remain {
+	//	return error('amount to read is bigger than remaining bytes')
+	//}
 	if r.idx + i64(amount) > r.cap() {
 		return error('overflow cap')
 	}
