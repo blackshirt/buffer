@@ -33,6 +33,11 @@ pub fn new_reader_with_endianess(b []u8, endian bool) &Reader {
 	}
 }
 
+pub fn (mut r Reader) free() {
+	r.buf.free()
+	r.idx = i6(0)
+}
+	
 // resets the Reader to be reading from b
 pub fn (mut r Reader) reset(b []u8) {
 	r = Reader{
