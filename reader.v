@@ -9,7 +9,7 @@ import blackshirt.u24
 //    - type of method that does not udpates current index, for looking data.
 // for 3 bytes long (24 bit) handling, its depends on `u24` module. Its available on my github.
 
-struct Reader {
+pub struct Reader {
 	// read only buffer of underlying data being wrapped
 	buf []u8
 	// default to big endian read
